@@ -1,10 +1,19 @@
+import { Route, Routes } from "react-router-dom"
+import AddPost from "./components/AddPost"
+import { Container } from "react-bootstrap"
+
 function App() {
   return (
-    <>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Container className="my-4">
+      <Routes>
+        <Route path="/" element={<h2>Home Page</h2>} />
+        <Route path="/add" element={<AddPost />} />
+        <Route path="/:id" >
+          <Route index element={<h2>View Post</h2>} />
+          <Route path="edit" element={<h2>Edit Post</h2>} />
+        </Route>
+      </Routes>
+    </Container>
   )
 }
 
