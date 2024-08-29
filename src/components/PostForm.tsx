@@ -1,13 +1,27 @@
 import { useRef, type FormEvent } from "react"
 import { Form, Stack, Row, Col, Button } from "react-bootstrap"
 import CreatableSelect from "react-select/creatable"
-function PostForm() {
+
+import { type PostData } from "../App"
+
+type PostFromProps = {
+    onSubmit: (data: PostData) => void
+
+}
+
+function PostForm({ onSubmit }: PostFromProps) {
     const titleRef = useRef<HTMLInputElement>(null)
     const markdownRef = useRef<HTMLTextAreaElement>(null)
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault()
+        onSubmit({
+            title: titleRef.current!.value,
+            markdown: markdownRef.current!.value,
+            tags: []
+        })
     }
+
 
     return (
         <Form onSubmit={handleSubmit}>
