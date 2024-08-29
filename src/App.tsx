@@ -1,6 +1,23 @@
 import { Route, Routes } from "react-router-dom"
-import AddPost from "./components/AddPost"
 import { Container } from "react-bootstrap"
+
+import AddPost from "./components/AddPost"
+
+export type Post = {
+  id: string
+} & PostData
+
+export type PostData = {
+  title: string
+  markdown: string
+  tags: Tag[]
+}
+
+export type Tag = {
+  id: string,
+  lable: string
+}
+
 
 function App() {
   return (
