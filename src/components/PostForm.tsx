@@ -1,8 +1,8 @@
-import { useRef, type FormEvent } from "react"
+import { useRef, useState, type FormEvent } from "react"
 import { Form, Stack, Row, Col, Button } from "react-bootstrap"
 import CreatableSelect from "react-select/creatable"
 
-import { type PostData } from "../App"
+import { Tag, type PostData } from "../App"
 
 type PostFromProps = {
     onSubmit: (data: PostData) => void
@@ -12,6 +12,8 @@ type PostFromProps = {
 function PostForm({ onSubmit }: PostFromProps) {
     const titleRef = useRef<HTMLInputElement>(null)
     const markdownRef = useRef<HTMLTextAreaElement>(null)
+
+    const [selectedTags, setSelectedTags] = useState<Tag[]>([])
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault()
@@ -36,7 +38,14 @@ function PostForm({ onSubmit }: PostFromProps) {
                     <Col>
                         <Form.Group controlId="tag">
                             <Form.Label>تگ</Form.Label>
-                            <CreatableSelect isMulti placeholder="انتخاب" />
+                            <CreatableSelect isMulti placeholder="انتخاب" value={selectedTags.map(item => {
+                                return { label: item.label, value: item.id }
+                            })}
+                                onChange={(tags) => {
+                                    setSelectedTags(tags.map(item => {
+                                        return { label: item.label, id: item.value }
+                                    }))
+                                }} />
                         </Form.Group>
                     </Col>
                 </Row>

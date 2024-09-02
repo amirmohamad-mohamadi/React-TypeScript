@@ -15,7 +15,7 @@ export type PostData = {
 
 export type Tag = {
   id: string,
-  lable: string
+  label: string
 }
 
 
